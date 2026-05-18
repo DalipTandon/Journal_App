@@ -4,6 +4,9 @@ import java.util.*;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,15 +32,20 @@ private JournalAppService journalAppService;
     }
 
     @PostMapping
-    public journalEntry createEntry(@RequestBody journalEntry entry) {
+    public ResponseEntity<journalEntry> createEntry(@RequestBody journalEntry entry) {
         entry.setDate(LocalDateTime.now());
         journalAppService.saveJournalEntry(entry);
-        return entry;
+        return new ResponseEntity<>(entry,HttpStatus.CREATED);
     }
 
     @GetMapping("/id/{id}")
-    public journalEntry getEntryById(@PathVariable ObjectId id) {
-        return journalAppService.getEntryById(id).orElse(null) ;
+    public ResponseEntity<journalEntry> getEntryById(@PathVariable ObjectId id) {
+        Optional<journalEntry>  jourEntry= journalAppService.getEntryById(id);
+        if(jourEntry.isPresent()){
+            return new ResponseEntity<>(jourEntry.get(),HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/id/{id}")
