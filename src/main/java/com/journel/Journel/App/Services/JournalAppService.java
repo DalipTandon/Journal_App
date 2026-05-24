@@ -28,5 +28,6 @@ public class JournalAppService {
     public void deleteEntry(ObjectId id){
          journalEntryRepository.deleteById(id);
     }
+    
    
 }
