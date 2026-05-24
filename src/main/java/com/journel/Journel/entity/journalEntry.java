@@ -10,9 +10,11 @@ import com.mongodb.lang.NonNull;
 import lombok.Data;
 // import lombok.Getter;
 // import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Document(collection="Journal_enteries")
 @Data
+@NoArgsConstructor
 // @Getter
 // @Setter
 public class journalEntry {

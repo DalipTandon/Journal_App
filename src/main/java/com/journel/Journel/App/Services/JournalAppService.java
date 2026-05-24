@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.journel.Journel.App.Respository.JournalAppRepository;
+import com.journel.Journel.entity.UserEntity;
 import com.journel.Journel.entity.journalEntry;
 
 @Component
@@ -15,8 +16,19 @@ public class JournalAppService {
     @Autowired
     private JournalAppRepository journalEntryRepository;
 
-    public void saveJournalEntry(journalEntry entry){ 
-        journalEntryRepository.save(entry);
+    @Autowired
+    private UserService userServ;
+    public void saveJournalEntry(journalEntry entry,String userName){ 
+        UserEntity user=userServ.findUserByUsername(userName);
+       journalEntry saved=journalEntryRepository.save(entry);
+       user.getJournanEnteries().add(saved);
+       userServ.saveEnteries(user);
+    }
+       public void saveJournalEntry(journalEntry entry){ 
+        // UserEntity user=userServ.findUserByUsername(userName);
+       journalEntryRepository.save(entry);
+    //    getJournanEnteries().add(saved);
+    //    userServ.saveEnteries(user);
     }
     public List<journalEntry> getAllEnteries(){
         return journalEntryRepository.findAll();
@@ -25,7 +37,10 @@ public class JournalAppService {
     public Optional<journalEntry> getEntryById(ObjectId myId){
         return journalEntryRepository.findById(myId);
     }
-    public void deleteEntry(ObjectId id){
+    public void deleteEntry(ObjectId id,String userName){
+         UserEntity user=userServ.findUserByUsername(userName);
+         user.getJournanEnteries().removeIf(x -> x.getId().equals(id));
+         userServ.saveEnteries(user);
          journalEntryRepository.deleteById(id);
     }
     
