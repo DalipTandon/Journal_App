@@ -17,8 +17,8 @@ public class UserService {
     private UserRepository userRepo;
 
     public void saveEnteries(UserEntity user){
-        System.out.println(user.getUserName());
-        System.out.println(user.getPassword());
+        // System.out.println(user.getUserName());
+        // System.out.println(user.getPassword());
         userRepo.save(user);
     }
 
