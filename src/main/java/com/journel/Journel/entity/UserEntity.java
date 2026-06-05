@@ -24,5 +24,45 @@ public class UserEntity {
     private String password;
     @DBRef
     private List<journalEntry> journanEnteries=new ArrayList<>();
+    private List<String> roles;
 
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<journalEntry> getJournanEnteries() {
+        return journanEnteries;
+    }
+
+    public void setJournanEnteries(List<journalEntry> journanEnteries) {
+        this.journanEnteries = journanEnteries;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 }

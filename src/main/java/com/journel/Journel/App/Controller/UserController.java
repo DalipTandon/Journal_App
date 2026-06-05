@@ -30,7 +30,10 @@ public class UserController {
 
     @PostMapping
     public void saveUserDetails(@RequestBody UserEntity user){
-        userService.saveEnteries(user);
+        // userService.saveEnteries(user);
+        
+        user.setRoles(List.of("USER"));
+        userService.saveNewEnteries(user);
     }
 
     @PutMapping("/{userName}")
