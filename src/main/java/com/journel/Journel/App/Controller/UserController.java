@@ -1,6 +1,6 @@
 package com.journel.Journel.App.Controller;
 
-import java.net.Authenticator;
+// import java.net.Authenticator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
