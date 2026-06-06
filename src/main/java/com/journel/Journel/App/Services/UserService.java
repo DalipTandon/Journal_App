@@ -22,6 +22,8 @@ public class UserService {
     public void saveEnteries(UserEntity user){
         // System.out.println(user.getUserName());
         // System.out.println(user.getPassword());
+        //  user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userRepo.save(user);
     }
         public void saveNewEnteries(UserEntity user){
@@ -40,6 +42,10 @@ public class UserService {
     }
     public void deleteById(ObjectId myId){
          userRepo.deleteById(myId);
+    }
+
+     public void deleteByUserName(String userName){
+         userRepo.deleteByUserName(userName);
     }
     public UserEntity findUserByUsername(String username){
         return userRepo.findByUserName(username);

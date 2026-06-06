@@ -27,7 +27,7 @@ public class SpringSecurity {
         return http
                 .authorizeHttpRequests(request -> request
                     .requestMatchers("/public/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/users").permitAll() // ✅ allow registration
+                    .requestMatchers("/users/**").permitAll() 
                     .anyRequest().authenticated()
             )
                 .httpBasic(Customizer.withDefaults())
